@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+@font-face {
+    font-family: 'vcr-ocd';
+    src: url('vcr-ocd.ttf');
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#container {
+  font-family: 'Roboto Mono';
+  position: relative;
+  height: 100vh;
+  background-color: transparent !important;
+  display: none;
+}
+
+#cameraLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.9);
+  padding: 0.3vw;
+  text-align:center;
+  text-transform: uppercase;
+}
+
+#cameraDate {
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.9);
+  padding: 0.3vw;
+}
+
+#cameraTime {
+  position: absolute;
+  right: 10%;
+  top: 10%;
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.9);
+  padding: 0.3vw;
+}
+
+#cameraIP {
+  position: absolute;
+  right: 10%;
+  bottom: 15%;
+  transform: translate(0, -50%);
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.9);
+  padding: 0.3vw;
+}
+
+#cameraConnected {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  transform: translate(0, -50%);
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.9);
+  padding: 0.3vw;
+}
+.connected {
+  color:#3cc71a!important;
+}
+.disconnect {
+  color:#ba1e1e!important;
+}
+
+#blockscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(25,25,25,1.0);
+  display: none;
+  z-index: -99;
+}
