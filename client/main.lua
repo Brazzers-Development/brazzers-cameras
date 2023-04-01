@@ -1,9 +1,9 @@
 local QBCore = exports[Config.Core]:GetCoreObject()
 
-local PlayerData = {}
-local isLoggedIn = false
+PlayerData = {}
+isLoggedIn = false
+cachedCameras = {}
 
-local cachedCameras = {}
 local camera
 local placingCamera = false
 
@@ -423,32 +423,6 @@ AddEventHandler('onResourceStop', function(resourceName)
                 DeleteObject(v["object"])
             end
         end
-    end
-end)
-
--- Threads
-
-CreateThread(function()
-    PlayerData = QBCore.Functions.GetPlayerData()
-    isLoggedIn = true
-
-    QBCore.Functions.TriggerCallback('brazzers-cameras:server:getCameras', function(result)
-		cachedCameras = result
-    end)
-
-    for model, _ in pairs(Config.Models) do
-        exports[Config.Target]:AddTargetModel(model, {
-            options = {
-                {
-                    icon = 'fas fa-camera',
-                    label = 'Destroy Camera',
-                    action = function(entity)
-                        destroyCamera(entity)
-                    end,
-                },
-            },
-            distance = 2.5,
-        })
     end
 end)
 

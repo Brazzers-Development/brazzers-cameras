@@ -97,3 +97,45 @@ if not Config.RenewedPhone and Config.EnableCommand then
         TriggerEvent('brazzers-cameras:client:showNUI')
     end)
 end
+
+-- Threads
+
+CreateThread(function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+    isLoggedIn = true
+
+    QBCore.Functions.TriggerCallback('brazzers-cameras:server:getCameras', function(result)
+		cachedCameras = result
+    end)
+
+    for model, _ in pairs(Config.Models) do
+        if Config.Target == 'ox' then
+            exports.ox_target:addModel({
+                models = model,
+                options = {
+                    {   
+                        name = 'camera_target',
+                        icon = Config.Lang['target']['icon'],
+                        label = Config.Lang['target']['destroy'],
+                        onSelect = function(entity)
+                            destroyCamera(entity)
+                        end,
+                    },
+                }
+            })
+        else
+            exports[Config.Target]:AddTargetModel(model, {
+                options = {
+                    {
+                        icon = Config.Lang['target']['icon'],
+                        label = Config.Lang['target']['destroy'],
+                        action = function(entity)
+                            destroyCamera(entity)
+                        end,
+                    },
+                },
+                distance = 2.5,
+            })
+        end
+    end
+end)
