@@ -39,7 +39,7 @@ local function RequestProp(prop)
 end
 
 local function haveAccessToCam(camid)
-    local cid = QBCore.Functions.GetPlayerData().citizenid
+    local cid = PlayerData.citizenid
     local retval = false
     if not cachedCameras[camid] then return end
 
@@ -57,7 +57,7 @@ local function haveAccessToCam(camid)
 end exports("haveAccessToCam", haveAccessToCam)
 
 local function getMyCameras()
-    local cid = QBCore.Functions.GetPlayerData().citizenid
+    local cid = PlayerData.citizenid
     local cameraList = {}
 
     for k, v in pairs(cachedCameras) do
@@ -105,7 +105,7 @@ end exports("getAccessList", getAccessList)
 local function isCameraOwner(camid)
     if not cachedCameras[camid] then return end
 
-    local cid = QBCore.Functions.GetPlayerData().citizenid
+    local cid = PlayerData.citizenid
     local retval = false
 
     if cachedCameras[camid].owner == cid then
@@ -154,7 +154,7 @@ local function placeCamera(model)
     CreateThread(function()
         while placingCamera do
             local playerCoords = GetEntityCoords(ped)
-            local hit, coords, entity = RayCastGamePlayCamera(7)
+            local hit, coords, _ = RayCastGamePlayCamera(7)
 
             coords = coords + Config.Models[model]['offset']
 
@@ -417,8 +417,8 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
-    if GetCurrentResourceName() == 'brazzers-cameras' then
-        for k, v in pairs(cachedCameras) do
+    if GetCurrentResourceName() == resourceName then
+        for _, v in pairs(cachedCameras) do
             if v["rendered"] then
                 DeleteObject(v["object"])
             end
@@ -455,20 +455,22 @@ end)
 CreateThread(function()
     while true do
         local sleep = 1500
-        if not cachedCameras then cachedCameras = {} end
-        for _, v in pairs(cachedCameras) do
-            local ped = PlayerPedId()
-            local pos = GetEntityCoords(ped)
-            if #(pos - vector3(tonumber(v.coords.x), tonumber(v.coords.y), tonumber(v.coords.z))) < 100 then
-                if not v['rendered'] then
-                    local model = createObject(v.camid, v.coords)
-                    v['rendered'] = true
-                    v['object'] = model
+        if isLoggedIn then
+            if not cachedCameras then cachedCameras = {} end
+            for _, v in pairs(cachedCameras) do
+                local ped = PlayerPedId()
+                local pos = GetEntityCoords(ped)
+                if #(pos - vector3(tonumber(v.coords.x), tonumber(v.coords.y), tonumber(v.coords.z))) < 100 then
+                    if not v['rendered'] then
+                        local model = createObject(v.camid, v.coords)
+                        v['rendered'] = true
+                        v['object'] = model
+                    end
                 end
-            end
-            if #(pos - vector3(tonumber(v.coords.x), tonumber(v.coords.y), tonumber(v.coords.z))) >= 100 and v['rendered'] then
-                if DoesEntityExist(v['object']) then
-                    removeObject(v.camid)
+                if #(pos - vector3(tonumber(v.coords.x), tonumber(v.coords.y), tonumber(v.coords.z))) >= 100 and v['rendered'] then
+                    if DoesEntityExist(v['object']) then
+                        removeObject(v.camid)
+                    end
                 end
             end
         end
