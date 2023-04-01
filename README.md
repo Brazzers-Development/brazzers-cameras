@@ -19,21 +19,22 @@
 # Installation steps
 
 ## General Setup
-A group based market system, allowing you to claim, join, leave, and change booth DUIs all in game set through the config. Each booth is set with an inventory to store any sellable content inside and a pickup location to handle your transactions with your customers. This system is absolutely amazing for roleplay within any server that needs ideas for businesses
+Advanced Camera System both supporting Renewed's Phone and standalone version utilizing. System allows you to add & remove access to other players, track cameras, destroy cameras, and rename cameras.
+All models that are put down are synced between all players (optimized with dist checking).
 
 ## Compatibility
-This system is compatible with (ox_inventory, ox_target, ox_lib, etc) & (qb-inventory, qb-target, etc) All options are in the config to modify your prefered style of installation
+This system is compatible with (ox_target) & (qb-target) All options are in the config to modify your prefered style of installation
 
 Preview: [SOON]
 
 ## Features
-1. Unique-Synced Market System
-2. Group Based System (Standalone) Not Requiring Any Group Dependencies
-3. Changeable DUIs Synced With All Players
-4. Custom Farmers Market Map Made Specifically For This System
-5. Ability To Claim, Join, & Leave Booths
-6. Ability To Create More Booths (Editable in the Config)
-7. Multi-Notification Support
+1. Unique-Synced Camera System
+2. Unique Standalone UI & Phone App
+3. Ability to add & remove to camera for players
+4. Ability to track cameras
+5. Ability to destroy cameras & supports auto destory based on days
+6. Ability to rename cameras
+7. Ability to set capabilities, filters, and more to each camera type
 8. Multi-Language Support using QBCore Locales
 9. 24/7 Support in discord
 
@@ -43,7 +44,4 @@ Taken#8395 - Farmers Market Map [Discord Server]()
 ## Dependencies
 1. qbcore
 2. qb-target or ox_target
-3. qb-inventory or ox_inventory
-4. ox_lib (if using any ox resource)
-5. PolyZone
 
