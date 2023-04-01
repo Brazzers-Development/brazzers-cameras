@@ -1,0 +1,4 @@
+
+	["camera1"] 					= {["name"] = "camera1",     					["label"] = "GoPro Camera",     		["weight"] = 1000,     ["type"] = "item",     	["image"] = "camera1.png",     			["unique"] = false,    ["useable"] = true,     ["shouldClose"] = true,     ["combinable"] = nil,     ["description"] = "Used to spy on ERP"},
+	["camera2"] 					= {["name"] = "camera2",     					["label"] = "CCTV Camera",     			["weight"] = 2500,     ["type"] = "item",     	["image"] = "camera2.png",     			["unique"] = false,    ["useable"] = true,     ["shouldClose"] = true,     ["combinable"] = nil,     ["description"] = "Used to spy on morons"},
+	["camera3"] 					= {["name"] = "camera3",     					["label"] = "CCTV Camera",     			["weight"] = 2500,     ["type"] = "item",     	["image"] = "camera3.png",     			["unique"] = false,    ["useable"] = true,     ["shouldClose"] = true,     ["combinable"] = nil,     ["description"] = "Used to spy on beautiful men"},
