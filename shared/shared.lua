@@ -51,5 +51,9 @@ Config.Lang = {
         ['stateid'] = 'State ID doesn\'t exist',
         ['canceled'] = 'Canceled',
         ['alreadyaccess'] = 'already has access to this camera',
+    },
+    ['target'] = {
+        ['icon'] = 'fas fa-camera',
+        ['destroy'] = 'Destroy Camera',
     }
 }
