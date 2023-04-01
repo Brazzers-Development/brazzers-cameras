@@ -25,7 +25,7 @@ local function generateCameraID()
         end
     end
     return uniqueItemId
-end exports("generateBusinessId", generateBusinessId)
+end exports("generateCameraID", generateCameraID)
 
 local function haveAccessToCam(cid, camid)
     local retval = false
@@ -77,7 +77,7 @@ RegisterNetEvent('brazzers-cameras:server:placeCamera', function(coords, heading
 
     local newCoords = {x = coords.x, y = coords.y, z = coords.z, w = heading}
 
-    MySQL.insert('INSERT INTO player_cameras (`camid`, `name`, `owner`, `coords`, `model`) VALUES (?, ?, ?, ?, ?)', 
+    MySQL.insert('INSERT INTO player_cameras (`camid`, `name`, `owner`, `coords`, `model`) VALUES (?, ?, ?, ?, ?)',
     {camID, camID, CID, json.encode(newCoords), model})
 
     Wait(100)

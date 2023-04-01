@@ -8,38 +8,24 @@ function RayCastGamePlayCamera(distance)
         y = cameraCoord.y + direction.y * distance,
         z = cameraCoord.z + direction.z * distance
     }
-    local a, b, c, d, e = GetShapeTestResult(StartShapeTestRay(cameraCoord.x, cameraCoord.y, cameraCoord.z, destination.x, destination.y, destination.z, -1, PlayerPedId(), 0))
+    local _, b, c, _, e = GetShapeTestResult(StartShapeTestRay(cameraCoord.x, cameraCoord.y, cameraCoord.z, destination.x, destination.y, destination.z, -1, PlayerPedId(), 0))
     return b, c, e
 end
 
 function RotationToDirection(rotation)
-    local adjustedRotation = 
-    { 
-        x = (math.pi / 180) * rotation.x, 
-        y = (math.pi / 180) * rotation.y, 
-        z = (math.pi / 180) * rotation.z 
-    }
-    local direction = 
+    local adjustedRotation =
     {
-        x = -math.sin(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)), 
-        y = math.cos(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)), 
+        x = (math.pi / 180) * rotation.x,
+        y = (math.pi / 180) * rotation.y,
+        z = (math.pi / 180) * rotation.z
+    }
+    local direction =
+    {
+        x = -math.sin(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)),
+        y = math.cos(adjustedRotation.z) * math.abs(math.cos(adjustedRotation.x)),
         z = math.sin(adjustedRotation.x)
     }
     return direction
-end
-
-function RayCastPed(pos,distance,ped)
-    local cameraRotation = GetGameplayCamRot()
-    local direction = RotationToDirection(cameraRotation)
-    local destination = 
-    { 
-        x = pos.x + direction.x * distance, 
-        y = pos.y + direction.y * distance, 
-        z = pos.z + direction.z * distance 
-    }
-
-    local a, b, c, d, e = GetShapeTestResult(StartShapeTestRay(pos.x, pos.y, pos.z, destination.x, destination.y, destination.z, -1, ped, 1))
-    return b, c
 end
 
 function ButtonMessage(text)
@@ -52,8 +38,8 @@ function Button(ControlButton)
     N_0xe83a3e3557a56640(ControlButton)
 end
 
-function setupScaleform(scaleform)
-    local scaleform = RequestScaleformMovie(scaleform)
+function setupScaleform(pScaleform)
+    local scaleform = RequestScaleformMovie(pScaleform)
     while not HasScaleformMovieLoaded(scaleform) do
         Wait(0)
     end

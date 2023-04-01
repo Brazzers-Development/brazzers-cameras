@@ -7,7 +7,7 @@ end
 -- Useable Items
 
 for k, v in pairs(Config.Models) do
-    QBCore.Functions.CreateUseableItem(v['item'], function(source, item)
+    QBCore.Functions.CreateUseableItem(v['item'], function(source, _)
         TriggerClientEvent('brazzers-cameras:client:placeDownCamera', source, k)
     end)
 end
