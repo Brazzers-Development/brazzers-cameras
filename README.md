@@ -19,13 +19,17 @@
 # Installation steps
 
 ## General Setup
-Advanced Camera System both supporting Renewed's Phone and standalone version utilizing. System allows you to add & remove access to other players, track cameras, destroy cameras, and rename cameras.
-All models that are put down are synced between all players (optimized with dist checking).
+Advanced Camera System both supporting Renewed's Phone and standalone version utilizing. System allows you to add & remove access to other players, track cameras, destroy cameras, and rename cameras. All models that are put down are synced between all players (optimized with dist checking).
 
 ## Compatibility
 This system is compatible with (ox_target) & (qb-target) All options are in the config to modify your prefered style of installation
 
 Preview: [SOON]
+
+## Installation Renewed Phone
+Locate the readme folder and copy and paste the entire css and js file. Open the HTML file and copy and paste those lines into the approrpiate section of your phone.
+
+You can also locate the items provided in the readme and paste those into your `items.lua`. I also gave you images you lazy fuck.
 
 ## Features
 1. Unique-Synced Camera System
@@ -35,11 +39,10 @@ Preview: [SOON]
 5. Ability to destroy cameras & supports auto destory based on days
 6. Ability to rename cameras
 7. Ability to set capabilities, filters, and more to each camera type
-8. Multi-Language Support using QBCore Locales
-9. 24/7 Support in discord
-
-## Credits
-Taken#8395 - Farmers Market Map [Discord Server]()
+8. Synced Models (Through Restarts)
+9. Runs 0.00ms Idle & During Usage
+10. Multi-Language Support using QBCore Locales
+11. 24/7 Support in discord
 
 ## Dependencies
 1. qbcore
