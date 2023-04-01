@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports[Config.Core]:GetCoreObject()
 
 local PlayerData = {}
 local isLoggedIn = false
@@ -115,6 +115,31 @@ local function isCameraOwner(camid)
     return retval
 end exports("isCameraOwner", isCameraOwner)
 
+local function fuckMe(coords, heading, model)
+    TaskTurnPedToFaceCoord(PlayerPedId(), coords, 1.0)
+    Wait(1000)
+    TaskGoStraightToCoord(PlayerPedId(), coords.xyz, 1, -1, 0.0, 0.0)
+    Wait(1500)
+    TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
+
+    if model == 'prop_cctv_cam_06a' then
+        coords = coords + vector3(0, -0.3, -0.3)
+    end
+
+    QBCore.Functions.Progressbar("placing_camera", 'Installing Camera', 5000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        TriggerServerEvent('brazzers-cameras:server:placeCamera', coords, heading, model)
+    end, function()
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        notification(Config.Lang['error']['canceled'], 'error')
+    end)
+end
+
 local function placeCamera(model)
     local ped = PlayerPedId()
     placingCamera = true
@@ -131,14 +156,12 @@ local function placeCamera(model)
             local playerCoords = GetEntityCoords(ped)
             local hit, coords, entity = RayCastGamePlayCamera(7)
 
-            SetEntityCoords(camera, coords + Config.Models[model]['offset'])
+            coords = coords + Config.Models[model]['offset']
+
+            SetEntityCoords(camera, coords)
             if hit and #(GetEntityCoords(ped) - coords) <= 5 then
                 SetEntityAlpha(camera, 150)
-                if model == 'prop_cctv_cam_06a' then
-                    DrawLine(coords.x, coords.y + 0.5, coords.z - 0.3, playerCoords.x, playerCoords.y, playerCoords.z, 255, 255, 255, 255)
-                else
-                    DrawLine(coords.x, coords.y, coords.z, playerCoords.x, playerCoords.y, playerCoords.z, 255, 255, 255, 255)
-                end
+                DrawLine(coords.x, coords.y, coords.z, playerCoords.x, playerCoords.y, playerCoords.z, 255, 255, 255, 255)
 
                 if IsControlJustPressed(0, 241) then
                     SetEntityRotation(camera, 0, 0, GetEntityHeading(camera) + 10, 2, true)
@@ -151,12 +174,12 @@ local function placeCamera(model)
                 if IsControlJustPressed(0, 38) then
                     DeleteEntity(camera)
                     placingCamera = false
-                    TriggerServerEvent('brazzers-cameras:server:placeCamera', coords, GetEntityHeading(ped), model)
+                    fuckMe(coords, GetEntityHeading(ped), model)
                     break
                 end
 
                 if IsControlJustPressed(0, 194) then
-                    QBCore.Functions.Notify('Camera placement canceled', 'error')
+                    notification(Config.Lang['error']['canceled'], 'error')
                     DeleteEntity(camera)
                     placingCamera = false
                     break
@@ -198,7 +221,23 @@ end
 
 local function destroyCamera(entity)
     local camera, camid = getCamByObject(entity)
-    TriggerServerEvent('brazzers-cameras:server:removeCamera', camid)
+    local coords = camera.coords
+    
+    TaskGoStraightToCoord(PlayerPedId(), coords.xyz, 1, -1, 0.0, 0.0)
+    Wait(1500)
+    TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
+    QBCore.Functions.Progressbar("destroying_camera", 'Destroying Camera', 5000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        TriggerServerEvent('brazzers-cameras:server:removeCamera', camid)
+    end, function()
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        notification(Config.Lang['error']['canceled'], 'error')
+    end)
 end
 
 local function exitCam(model)
@@ -315,7 +354,6 @@ local function viewCamera(camid)
             action = "enableCam",
             label = cachedCameras[camid].name,
             id = camid,
-            connected = true,
             time = GetCurrentTime(),
         })
     end
@@ -337,7 +375,7 @@ local function trackCamera(camid)
     if not cachedCameras[camid] then return end
     local coords = cachedCameras[camid].coords
     SetNewWaypoint(coords.x, coords.y)
-    QBCore.Functions.Notify('Camera marked on your GPS', 'primary')
+    notification(Config.Lang['primary']['marked'], 'primary')
 end exports("trackCamera", trackCamera)
 
 -- Events
@@ -363,15 +401,9 @@ RegisterNetEvent('brazzers-cameras:client:updateName', function(name, camid)
     cachedCameras[camid].name = name
 end)
 
--- Commands
-
-RegisterCommand('cam', function()
-    TriggerEvent('brazzers-cameras:client:placeDownCamera')
-end)
-
 -- Handlers
 
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
     isLoggedIn = true
 
@@ -380,7 +412,7 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     end)
 end)
 
-AddEventHandler('QBCore:Client:OnPlayerUnload', function()
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     isLoggedIn = false
 end)
 
