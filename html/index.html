@@ -1,27 +1,48 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- CDN's -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- JQuery -->
-  </head>
-</html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="./style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <!-- CDN's -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- JQuery -->
+    </head>
+    <body>
+      <div id="container-camera">
+          <div id="cameraDate"></div>
+          <div id="cameraTime"></div>
+          <div id="cameraIP"></div>
+      </div>
+      <div class="container">
+          <div class="header">
+              <i class="fas fa-search" id="search-icon"></i>
+              <input type="text" id="search" placeholder="" spellcheck="false">
+          </div>
 
-<body style="background:rgb(0,0,0,0.0)">
-  <div id="container">
-      <div id="cameraLabel"></div>
-      <div id="cameraDate"></div>
-      <div id="cameraTime"></div>
-      <div id="cameraIP"></div>
-      <div id="cameraConnected" class="connected"></div>
-      
-      <div id="blockscreen"></div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="vue.min.js"></script>
-  <script src="script.js"></script>
-</body>
+          <div class="lists"></div>
+          <div class="dropdown-menu" id="dropdown"></div>
+
+          <div class="input-menu-body" id="rename-menu">
+              <div class="input-menu-main">
+                  <input class="input-menu-text name-camera" type="text"><i class="fas fa-id-card" id="input-menu-icon"></i><span class="input-menu-title">NAME</span>
+                  <p> </p>
+                  <div class="input-menu-button input-menu-cancel" id="cancel">CANCEL</div>
+                  <div class="input-menu-button input-menu-accept" id="rename-submit">SUBMIT</div>
+              </div>
+          </div>
+          <div class="input-menu-body" id="access-camera-menu">
+              <div class="input-menu-main">
+                  <input class="input-menu-text stateid-access" type="text"><i class="fas fa-id-card" id="input-menu-icon"></i><span class="input-menu-title">STATE ID</span>
+                  <p> </p>
+                  <div class="input-menu-button input-menu-cancel" id="cancel">CANCEL</div>
+                  <div class="input-menu-button input-menu-accept" id="access-camera-submit">SUBMIT</div>
+              </div>
+        </div>
+        <button class="close-button">CLOSE</button>
+      </div>
+
+      <script src="script.js"></script>
+    </body>
+</html>

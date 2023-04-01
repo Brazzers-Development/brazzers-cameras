@@ -1,91 +1,374 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
-
-@font-face {
-    font-family: 'vcr-ocd';
-    src: url('vcr-ocd.ttf');
-}
+@import url('https://fonts.googleapis.com/css?family=VT323');
 
 html {
   overflow-x: hidden;
   overflow-y: hidden;
 }
 
-#container {
-  font-family: 'Roboto Mono';
+#container-camera {
+  font-family: 'VT323';
   position: relative;
   height: 100vh;
   background-color: transparent !important;
   display: none;
-}
-
-#cameraLabel {
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: white;
-  background: rgba(0,0,0,0.9);
-  padding: 0.3vw;
-  text-align:center;
-  text-transform: uppercase;
+  overflow: hidden;
 }
 
 #cameraDate {
   position: absolute;
-  left: 10%;
-  top: 10%;
-  font-size: 20px;
+  right: 15%;
+  bottom: 10%;
+  font-size: 40px;
   color: white;
-  background: rgba(0,0,0,0.9);
   padding: 0.3vw;
+  -webkit-text-stroke: 1px black;
 }
 
 #cameraTime {
   position: absolute;
-  right: 10%;
-  top: 10%;
-  font-size: 20px;
+  right: 5%;
+  bottom: 10%;
+  font-size: 40px;
   color: white;
-  background: rgba(0,0,0,0.9);
   padding: 0.3vw;
+  -webkit-text-stroke: 1px black;
 }
 
 #cameraIP {
   position: absolute;
-  right: 10%;
-  bottom: 15%;
+  right: 5%;
+  bottom: 12.5%;
   transform: translate(0, -50%);
-  font-size: 20px;
+  font-size: 40px;
   color: white;
-  background: rgba(0,0,0,0.9);
   padding: 0.3vw;
+  -webkit-text-stroke: 1px black;
 }
 
-#cameraConnected {
-  position: absolute;
-  right: 10%;
-  bottom: 10%;
-  transform: translate(0, -50%);
-  font-size: 20px;
-  color: white;
-  background: rgba(0,0,0,0.9);
-  padding: 0.3vw;
-}
-.connected {
-  color:#3cc71a!important;
-}
-.disconnect {
-  color:#ba1e1e!important;
+/* Shit UI */
+
+.container{
+    display: none;
+    position: relative;
+    background-color: #182634c2;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    top: 10vh;
+    width: 70vw;
+    height: 70vh;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
 }
 
-#blockscreen {
+/* Search Bar */
+
+#search-icon {
   position: absolute;
-  top: 0;
+  top: 7.3vh;
+  left: 8vh;
+  font-size: 1.9vh;
+  color: #FFFFFF;
+}
+#search {
+  display: block;
+  font-size: 1.9vh;
+  position: absolute;
+  background: none;
+  border: none;
+  outline: none;
+  top: 6.9vh;
+  width: 87%;
+  margin: 0 auto;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(25,25,25,1.0);
+  right: 0;
+  opacity: 1;
+  height: 2.5vh;
+  border-bottom: .1vh solid #f5f5f5ad;
+  text-indent: 3.5vh;
+  color: whitesmoke;
+}
+
+/* ACCESS HEADER */
+
+#access-search-icon {
+  position: absolute;
+  top: 7.3vh;
+  left: 8vh;
+  font-size: 1.9vh;
+  color: #FFFFFF;
+}
+
+#access-back-icon {
+  position: absolute;
+  top: 6vh;
+  left: 2.5vh;
+  font-size: 2.1vh;
+  color: #FFFFFF;
+}
+
+#access-extras-icon {
+  position: absolute;
+  top: 4vh;
+  right: 2.5vh;
+  font-size: 2.1vh;
+  color: #FFFFFF;
+}
+
+#access-search {
+  display: block;
+  font-size: 1.9vh;
+  position: absolute;
+  background: none;
+  border: none;
+  outline: none;
+  top: 6.9vh;
+  width: 87%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  height: 2.5vh;
+  border-bottom: .1vh solid #f5f5f5ad;
+  text-indent: 3.5vh;
+  color: whitesmoke;
+}
+
+/* List */
+
+.lists::-webkit-scrollbar {
   display: none;
-  z-index: -99;
+}
+
+.lists {
+  position: absolute;
+  width: 87.0%;
+  height: 46.5vh;
+  top: 11.8vh;
+  margin: auto;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: #182634c2;
+  overflow-y: auto;
+}
+
+.list {
+  position: relative;
+  margin: auto;
+  width: 95%;
+  color: white;
+  height: 6vh;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgb(44, 70, 95);
+  box-shadow: rgba(0, 0, 0, 0.557) 0rem 0rem 0.1rem 0.01rem;
+  border-bottom: .1vh solid #fff;
+}
+
+.list:hover {
+  background-color: #15222e;
+}
+
+.list-icon {
+  position: absolute;
+  margin: .7vh;
+  margin-left: 1.0vh;
+  text-align: center;
+  line-height: 3.5vh;
+  color: white;
+  font-size: 4.0vh;
+}
+
+.list-name {
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  left: 8.0vh;
+  color: white;
+  line-height: 5.7vh;
+  font-size: 2.0vh;
+  max-width: 65%;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.list-extra {
+  position: absolute;
+  left: 8.3vh;
+  color: white;
+  line-height: 10vh;
+  font-size: 1.2vh;
+  max-width: 65%;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+
+/* Action Buttons */
+
+.action-buttons {
+  visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+.action-buttons > i {
+  position: relative;
+  float: left;
+  margin-left: 3.8vh;
+  left: 400px;
+  top: 1.7vh;
+  font-size: 2.4vh;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.action-buttons > i:hover {
+  color: #2c465f;
+}
+
+.list:hover .action-buttons {
+  background: #0d1218c0;
+  visibility: visible;
+}
+
+/* Input Menus */
+
+.input-menu-body{
+  display: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 70vw;
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.624);
+  overflow-y: auto;
+}
+
+.input-menu-main{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  width: 20%;
+  background-color: rgb(44, 70, 95);
+}
+
+.input-menu-text{
+  position: relative;
+  margin-left: 10%;
+  margin-top: 10%;
+  margin-bottom: -10%;
+  width: 80%;
+  border: none;
+  background: none;
+  outline: none;
+  text-indent: 3vh;
+  text-align: left;
+  line-height: 3.0vh;
+  font-size: 1.45vh;
+  overflow: hidden;
+  color: white;
+  border-bottom: .1vh solid #fff;
+  transition: 0.25s;
+}
+
+#input-menu-icon{
+  position: relative;
+  top: 0.2vh;
+  right: 20vh;
+  font-size: 1.4vh;
+  color: white;
+}
+
+.input-menu-title{
+  position: relative;
+  bottom: 4.3vh;
+  left: 3vh;
+  font-size: 1.0vh;
+  color: white;
+}
+
+.input-menu-button{
+  display: inline;
+  transition: 0.25s;
+  padding: 2%;
+  border-radius: 5px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1vh;
+  margin-bottom: 4%;
+}
+
+.input-menu-cancel{
+  background:#f6a167;
+  margin-left: 12%;
+  padding: 5.0%;
+}
+.input-menu-cancel:hover{
+  background: #c27e47;
+}
+
+.input-menu-accept{
+  background:#90e278;
+  margin-left: 13%;
+  padding: 5.0%;
+}
+.input-menu-accept:hover{
+  background: #6cac59;
+}
+
+/* DROP DOWN MENU */
+
+.dropdown-menu{
+  display: none;
+  position: absolute;
+  margin-left: 106vh;
+  margin-top: 3.3vh;
+  width: 80px;
+  height: 100px;
+}
+
+.list-content{
+  position: relative;
+  color: white;
+  height: 35px;
+  width: 180px;
+  overflow: hidden;
+  margin: auto;
+  font-family: 'Robotto', sans-serif;
+  font-size: 1.3vh;
+  background-color: #484444;
+}
+.list-content >i{
+  padding:  10px 10px 0px 10px;
+
+}
+
+.list-content:hover{
+  background-color: #585454;
+}
+
+/* OTHER */
+
+.close-button {
+  width: 10%;
+  position: relative;
+  background-color: #900000;
+  border-radius: 8px;
+  color: rgb(0, 0, 0);
+  padding: 7.5px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 675px;
+  user-select: none;
+  left: 45%;
 }
