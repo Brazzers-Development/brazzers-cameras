@@ -117,7 +117,7 @@ CreateThread(function()
             exports.ox_target:addModel({
                 models = model,
                 options = {
-                    {   
+                    {
                         name = 'camera_target',
                         icon = Config.Lang['target']['icon'],
                         label = Config.Lang['target']['destroy'],

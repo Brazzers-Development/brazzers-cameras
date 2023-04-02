@@ -230,7 +230,7 @@ local function getCamByObject(entity)
     return false
 end
 
-local function destroyCamera(entity)
+function destroyCamera(entity)
     local camera, camid = getCamByObject(entity)
     local coords = camera.coords
     
@@ -441,7 +441,6 @@ AddEventHandler('onResourceStop', function(resourceName)
 end)
 
 AddEventHandler('brazzers-cameras:client:animation', function(index)
-    local tablet = 0
     local tabletDict = "amb@code_human_in_bus_passenger_idles@female@tablet@base"
     local tabletAnim = "base"
     local tabletProp = "prop_cs_tablet"
