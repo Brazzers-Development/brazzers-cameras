@@ -1,7 +1,7 @@
 Config = Config or {}
 
 Config.Core = 'qb-core'
-Config.Target = 'rush-eye'
+Config.Target = 'qb-target'
 
 Config.RenewedPhone = true -- [true]: you're using the phone app instead of the standalone built UI
 Config.EnableCommand = false -- this is only for standalone version if you wanna enable a command to open the menu

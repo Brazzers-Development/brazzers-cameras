@@ -24,7 +24,7 @@ Advanced Camera System both supporting Renewed's Phone and standalone version ut
 ## Compatibility
 This system is compatible with (ox_target) & (qb-target) All options are in the config to modify your prefered style of installation
 
-Preview: [SOON]
+Preview: https://youtu.be/NFHgG_mD6Bk
 
 ## Installation Renewed Phone
 Locate the readme folder and copy and paste the entire css and js file. Open the HTML file and copy and paste those lines into the approrpiate section of your phone.
