@@ -84,7 +84,7 @@ RegisterNetEvent('brazzers-cameras:server:placeCamera', function(coords, heading
     cachedCameras[camID] = {camid = camID, name = camID, owner = CID, access = {}, coords = newCoords, model = model}
     TriggerClientEvent('brazzers-cameras:client:addCamera', -1, {camid = camID, name = camID, owner = CID, access = {}, coords = newCoords, model = model})
 
-    notification(source, Config.Lang['primary']['placed'], 'primary')
+    notification(src, Config.Lang['primary']['placed'], 'primary')
 
     -- Remove Item
     local item = Config.Models[model]['item']
@@ -105,7 +105,7 @@ RegisterNetEvent('brazzers-cameras:server:removeCamera', function(camid)
     cachedCameras[camid] = nil
     TriggerClientEvent('brazzers-cameras:client:removeCamera', -1, camid)
 
-    notification(source, Config.Lang['primary']['removed'], 'primary')
+    notification(src, Config.Lang['primary']['removed'], 'primary')
 end)
 
 RegisterNetEvent('brazzers-cameras:server:addToCamera', function(cid, camid)
@@ -116,7 +116,7 @@ RegisterNetEvent('brazzers-cameras:server:addToCamera', function(cid, camid)
     if not cachedCameras[camid] then return end
 
     local otherPlayer = getOfflinePlayer(cid)
-    if not otherPlayer then return notification(source, Config.Lang['error']['stateid'], 'error') end
+    if not otherPlayer then return notification(src, Config.Lang['error']['stateid'], 'error') end
 
     local name = otherPlayer.firstname..' '..otherPlayer.lastname
     local hasAccess = haveAccessToCam(cid, camid)
@@ -133,7 +133,7 @@ RegisterNetEvent('brazzers-cameras:server:addToCamera', function(cid, camid)
     Wait(100)
     TriggerClientEvent('brazzers-cameras:client:updateAccess', -1, cachedCameras[camid].access, camid)
 
-    notification(source, name..' '..Config.Lang['primary']['added']..' '..camid, 'primary')
+    notification(src, name..' '..Config.Lang['primary']['added']..' '..camid, 'primary')
 
     -- UPDATE NUI
     if not Config.RenewedPhone then return TriggerClientEvent('brazzers-cameras:updateAccessList', src, camid) end
@@ -149,7 +149,7 @@ RegisterNetEvent('brazzers-cameras:server:removeFromCamera', function(cid, camid
 
     local currentAccess = {}
     local otherPlayer = getOfflinePlayer(cid)
-    if not otherPlayer then return notification(source, Config.Lang['error']['stateid'], 'error') end
+    if not otherPlayer then return notification(src, Config.Lang['error']['stateid'], 'error') end
     local name = otherPlayer.firstname..' '..otherPlayer.lastname
 
     for k, v in pairs(cachedCameras[camid].access) do
@@ -165,7 +165,7 @@ RegisterNetEvent('brazzers-cameras:server:removeFromCamera', function(cid, camid
     cachedCameras[camid].access = currentAccess
     TriggerClientEvent('brazzers-cameras:client:updateAccess', -1, currentAccess, camid)
 
-    notification(source, name..' '..Config.Lang['primary']['removedfrom'], 'primary')
+    notification(src, name..' '..Config.Lang['primary']['removedfrom'], 'primary')
 
     -- UPDATE NUI
     if not Config.RenewedPhone then return TriggerClientEvent('brazzers-cameras:updateAccessList', src, camid) end
@@ -180,7 +180,7 @@ RegisterNetEvent('brazzers-cameras:server:renameCamera', function(camid, name)
     local cid = Player.PlayerData.citizenid
     if not cachedCameras[camid] then return end
 
-    if cachedCameras[camid].owner ~= cid then return notification(source, Config.Lang['primary']['altername'], 'primary') end
+    if cachedCameras[camid].owner ~= cid then return notification(src, Config.Lang['primary']['altername'], 'primary') end
 
     cachedCameras[camid].name = name
 
@@ -190,7 +190,7 @@ RegisterNetEvent('brazzers-cameras:server:renameCamera', function(camid, name)
     Wait(100)
     TriggerClientEvent('brazzers-cameras:client:updateName', -1, cachedCameras[camid].name, camid)
 
-    notification(source, Config.Lang['primary']['namechanged']..' '..name, 'primary')
+    notification(src, Config.Lang['primary']['namechanged']..' '..name, 'primary')
 
     -- UPDATE NUI
     local cameras = getMyCameras(cid)
