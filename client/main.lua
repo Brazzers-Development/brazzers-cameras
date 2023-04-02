@@ -3,6 +3,7 @@ local QBCore = exports[Config.Core]:GetCoreObject()
 PlayerData = {}
 isLoggedIn = false
 cachedCameras = {}
+isOpen = false
 
 local camera
 local placingCamera = false
@@ -15,6 +16,13 @@ local camZ = 0.0
 local camFov = 60.0
 
 -- Functions
+
+local function LoadAnimDict(dict)
+    RequestAnimDict(dict)
+    while not HasAnimDictLoaded(dict) do
+        Wait(0)
+    end
+end
 
 local function GetCurrentTime()
     local hours = GetClockHours()
@@ -120,7 +128,10 @@ local function fuckMe(coords, heading, model)
     Wait(1000)
     TaskGoStraightToCoord(PlayerPedId(), coords.xyz, 1, -1, 0.0, 0.0)
     Wait(1500)
-    TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
+
+    LoadAnimDict("missexile3")
+    TaskPlayAnim(PlayerPedId(), "missexile3", "ex03_dingy_search_case_a_michael", 1.0, 1.0, -1, 1, 0, 0, 0, 0)
+
 
     if model == 'prop_cctv_cam_06a' then
         coords = coords + vector3(0, -0.3, -0.3)
@@ -132,10 +143,10 @@ local function fuckMe(coords, heading, model)
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function()
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        ClearPedTasks(PlayerPedId())
         TriggerServerEvent('brazzers-cameras:server:placeCamera', coords, heading, model)
     end, function()
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        ClearPedTasks(PlayerPedId())
         notification(Config.Lang['error']['canceled'], 'error')
     end)
 end
@@ -225,17 +236,20 @@ local function destroyCamera(entity)
     
     TaskGoStraightToCoord(PlayerPedId(), coords.xyz, 1, -1, 0.0, 0.0)
     Wait(1500)
-    TriggerEvent('animations:client:EmoteCommandStart', {"mechanic4"})
+
+    LoadAnimDict("missexile3")
+    TaskPlayAnim(PlayerPedId(), "missexile3", "ex03_dingy_search_case_a_michael", 1.0, 1.0, -1, 1, 0, 0, 0, 0)
+
     QBCore.Functions.Progressbar("destroying_camera", 'Destroying Camera', 5000, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function()
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        ClearPedTasks(PlayerPedId())
         TriggerServerEvent('brazzers-cameras:server:removeCamera', camid)
     end, function()
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        ClearPedTasks(PlayerPedId())
         notification(Config.Lang['error']['canceled'], 'error')
     end)
 end
@@ -424,6 +438,47 @@ AddEventHandler('onResourceStop', function(resourceName)
             end
         end
     end
+end)
+
+AddEventHandler('brazzers-cameras:client:animation', function(index)
+    local tablet = 0
+    local tabletDict = "amb@code_human_in_bus_passenger_idles@female@tablet@base"
+    local tabletAnim = "base"
+    local tabletProp = "prop_cs_tablet"
+    local tabletBone = 60309
+    local tabletOffset = vector3(0.03, 0.002, -0.0)
+    local tabletRot = vector3(10.0, 160.0, 0.0)
+
+    isOpen = index
+    if not isOpen then return end;
+    -- Animation
+    RequestAnimDict(tabletDict)
+    while not HasAnimDictLoaded(tabletDict) do Wait(100) end
+    -- Model
+    RequestModel(tabletProp)
+    while not HasModelLoaded(tabletProp) do Wait(100) end
+
+    local plyPed = PlayerPedId()
+    local tabletObj = CreateObject(tabletProp, 0.0, 0.0, 0.0, true, true, false)
+    local tabletBoneIndex = GetPedBoneIndex(plyPed, tabletBone)
+
+    TriggerEvent('actionbar:setEmptyHanded')
+    AttachEntityToEntity(tabletObj, plyPed, tabletBoneIndex, tabletOffset.x, tabletOffset.y, tabletOffset.z, tabletRot.x, tabletRot.y, tabletRot.z, true, false, false, false, 2, true)
+    SetModelAsNoLongerNeeded(tabletProp)
+
+    CreateThread(function()
+        while isOpen do
+            Wait(0)
+            if not IsEntityPlayingAnim(plyPed, tabletDict, tabletAnim, 3) then
+                TaskPlayAnim(plyPed, tabletDict, tabletAnim, 3.0, 3.0, -1, 49, 0, 0, 0, 0)
+            end
+        end
+        ClearPedSecondaryTask(plyPed)
+        Wait(250)
+        DetachEntity(tabletObj, true, false)
+        DeleteEntity(tabletObj)
+        return
+    end)
 end)
 
 CreateThread(function()

@@ -14,6 +14,7 @@ end)
 RegisterNUICallback('viewCam', function(data, cb)
     if not data then return end
     exports['brazzers-cameras']:viewCamera(data.camid)
+    TriggerEvent('brazzers-cameras:client:animation', false)
     cb("ok")
 end)
 
@@ -64,6 +65,7 @@ end)
 
 RegisterNUICallback('close', function()
     SetNuiFocus(false, false)
+    TriggerEvent('brazzers-cameras:client:animation', false)
 end)
 
 -- Events
@@ -74,6 +76,8 @@ RegisterNetEvent('brazzers-cameras:client:showNUI', function()
         action = 'open',
         cameras = exports['brazzers-cameras']:getMyCameras() or {},
     })
+
+    TriggerEvent('brazzers-cameras:client:animation', true)
 end)
 
 RegisterNetEvent('brazzers-cameras:updateCameras', function(data)
