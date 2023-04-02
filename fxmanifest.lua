@@ -27,3 +27,12 @@ files {
 }
 
 ui_page 'html/index.html'
+
+escrow_ignore {
+    'client/open.lua',
+    'server/open.lua',
+	'shared/*.lua',
+	'html/*.html',
+	'html/script.js',
+	'html/style.css',
+}
