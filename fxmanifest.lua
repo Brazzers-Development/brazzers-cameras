@@ -31,6 +31,7 @@ ui_page 'html/index.html'
 escrow_ignore {
     'client/open.lua',
     'server/open.lua',
+	'readme/*.lua',
 	'shared/*.lua',
 	'html/*.html',
 	'html/script.js',
