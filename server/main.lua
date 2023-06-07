@@ -108,10 +108,12 @@ RegisterNetEvent('brazzers-cameras:server:removeCamera', function(camid)
     notification(src, Config.Lang['primary']['removed'], 'primary')
 end)
 
-RegisterNetEvent('brazzers-cameras:server:addToCamera', function(cid, camid)
+RegisterNetEvent('brazzers-cameras:server:addToCamera', function(stateid, camid)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
+
+    local cid = tostring(stateid)
 
     if not cachedCameras[camid] then return end
 
@@ -140,10 +142,12 @@ RegisterNetEvent('brazzers-cameras:server:addToCamera', function(cid, camid)
     TriggerClientEvent('qb-phone:client:updateAccessList', src, camid)
 end)
 
-RegisterNetEvent('brazzers-cameras:server:removeFromCamera', function(cid, camid)
+RegisterNetEvent('brazzers-cameras:server:removeFromCamera', function(stateid, camid)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
+
+    local cid = tostring(stateid)
 
     if not cachedCameras[camid] then return end
 
@@ -153,7 +157,7 @@ RegisterNetEvent('brazzers-cameras:server:removeFromCamera', function(cid, camid
     local name = otherPlayer.firstname..' '..otherPlayer.lastname
 
     for k, v in pairs(cachedCameras[camid].access) do
-        if v.cid ~= tostring(cid) then
+        if v.cid ~= cid then
             currentAccess[#currentAccess+1] = cachedCameras[camid].access[k]
         end
     end

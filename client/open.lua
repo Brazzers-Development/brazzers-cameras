@@ -50,7 +50,7 @@ end)
 
 RegisterNUICallback('removeAccess', function(data, cb)
     if not data then return end
-    TriggerServerEvent("brazzers-cameras:server:removeFromCamera", tonumber(data.stateid), data.camid)
+    TriggerServerEvent("brazzers-cameras:server:removeFromCamera", data.stateid, data.camid)
     cb("ok")
 end)
 
