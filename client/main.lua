@@ -276,8 +276,10 @@ end
 local function thanksZooForRotation(model)
     local newY = camY
     while viewingCamera do
-        local instructions = setupScaleform("instructional_buttons")
-        DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)
+        if not Config.DisableScaleforms then
+            local instructions = setupScaleform("instructional_buttons")
+            DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)
+        end
 
         DisableAllControlActions(0)
         EnableControlAction(0, 32, true)

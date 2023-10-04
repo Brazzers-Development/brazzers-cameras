@@ -10,6 +10,8 @@ Config.Command = 'cameras'
 Config.DeleteOnDays = true -- [true]: allows cameras to be deleted from the database after the amount of days set below
 Config.DaysLasts = 7 -- [int] Above must be set to `true` for this to even do anything
 
+Config.DisableScaleforms = false
+
 Config.Models = {
     ['prop_cctv_cam_06a'] = {
         ['offset'] = vector3(0, 0, 0),
