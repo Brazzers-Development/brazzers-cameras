@@ -9,7 +9,7 @@ local camera
 local placingCamera = false
 
 local viewCam
-local viewingCamera = false
+viewingCamera = false
 local camX = 0.0
 local camY = 0.0
 local camZ = 0.0

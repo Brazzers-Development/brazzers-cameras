@@ -143,3 +143,7 @@ CreateThread(function()
         end
     end
 end)
+
+-- Exports
+
+exports('viewingCamera', function() return viewingCamera end)
